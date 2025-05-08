@@ -13,6 +13,8 @@ services:
     environment:
       - key: NODE_ENV
         value: production
+      - key: PORT
+        value: "80"
     github:
       enabled: true
       repo: your-username/investment_idea_tracker
