@@ -7,6 +7,9 @@ services:
     build_command: yarn install && yarn build
     run_command: yarn start
     http_port: 80
+    https_port: 443
+    domains:
+      - investmentideas.swingfaders.com
     environment:
       - key: NODE_ENV
         value: production
