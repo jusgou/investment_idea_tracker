@@ -1,0 +1,16 @@
+name: investment-idea-tracker
+region: sgp1  # Singapore region
+services:
+  - name: web
+    environment_slug: nodejs_24
+    source_dir: .
+    build_command: yarn install && yarn build
+    run_command: yarn start
+    http_port: 80
+    environment:
+      - key: NODE_ENV
+        value: production
+    github:
+      enabled: true
+      repo: your-username/investment_idea_tracker
+      branch: main
