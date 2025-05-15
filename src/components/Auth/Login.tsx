@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
-import { Lock, Mail, Google } from 'lucide-react';
+import { Lock, Mail, Globe } from 'lucide-react';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -85,7 +85,7 @@ const Login: React.FC = () => {
               className="group relative w-full flex justify-center py-2 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                <Google className="h-5 w-5 text-gray-400 group-hover:text-gray-500" />
+                <Globe className="h-5 w-5 text-gray-400 group-hover:text-gray-500" />
               </span>
               Sign in with Google
             </button>
