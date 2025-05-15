@@ -12,5 +12,14 @@ export default defineConfig({
         drop_console: true,
       },
     },
+    rollupOptions: {
+      input: {
+        main: './index.html'
+      }
+    }
   },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', 'firebase'],
+    exclude: ['lucide-react']
+  }
 });
