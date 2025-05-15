@@ -29,6 +29,7 @@ investment_idea_tracker/
 - Responsive design
 - TypeScript-based frontend
 - Docker-based deployment
+- User authentication (planned integration with site-wide SSO)
 
 ## Technical Stack
 
@@ -37,6 +38,11 @@ investment_idea_tracker/
   - TypeScript
   - Vite
   - Tailwind CSS
+  - Firebase Authentication (planned integration with site-wide SSO)
+
+- Backend:
+  - PostgreSQL for data persistence
+  - REST API for data operations
 
 - Build & Deployment:
   - Docker

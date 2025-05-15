@@ -1,0 +1,50 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String        @id @default(cuid())
+  email     String        @unique
+  name      String?
+  ideas     Idea[]
+  history   IdeaHistory[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model Idea {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  category    String
+  symbol      String?
+  targetBuyPrice  Float?
+  currentPrice    Float?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  userId       String
+  user         User      @relation(fields: [userId], references: [id])
+  tags         String[]
+  history      IdeaHistory[]
+}
+
+model IdeaHistory {
+  id          String    @id @default(cuid())
+  ideaId      String
+  idea        Idea      @relation(fields: [ideaId], references: [id])
+  title       String
+  description String?
+  category    String
+  symbol      String?
+  targetBuyPrice  Float?
+  currentPrice    Float?
+  tags         String[]
+  createdAt    DateTime  @default(now())
+  userId       String
+  user         User      @relation(fields: [userId], references: [id])
+}

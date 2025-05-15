@@ -49,7 +49,7 @@ services:
 1. Wait for DNS propagation and SSL certificate provisioning
 2. Verify custom domain access
 3. Add additional features:
-   - User authentication
+   - User authentication (standalone implementation)
    - Data persistence
    - Additional investment analysis tools
 
@@ -67,6 +67,10 @@ services:
    - Investment tracking history
    - Portfolio analysis
    - Data export functionality
+   - Site-wide Single Sign-On (SSO) integration
+     - Centralized authentication service
+     - Token sharing between apps
+     - Unified user management
 
 2. Technical Improvements
    - Add unit tests
@@ -79,3 +83,4 @@ services:
    - Add rate limiting
    - Implement proper error handling
    - Add security headers
+   - SSO security considerations

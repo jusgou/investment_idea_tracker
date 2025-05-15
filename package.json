@@ -13,6 +13,7 @@
   "dependencies": {
     "@types/react-bootstrap": "0.32.37",
     "bootstrap": "5.3.6",
+    "firebase": "^11.7.3",
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
     "react-bootstrap": "2.10.9",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
+    "@prisma/client": "^6.8.1",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
@@ -30,6 +32,7 @@
     "eslint-plugin-react-refresh": "^0.4.11",
     "globals": "^15.9.0",
     "postcss": "^8.4.35",
+    "prisma": "^6.8.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.3.0",
