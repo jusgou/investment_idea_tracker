@@ -5,9 +5,8 @@ WORKDIR /app
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
-# Install PostgreSQL client tools and global packages
-RUN apk add --no-cache postgresql-client && \
-    npm install -g vite
+# Install PostgreSQL client tools only
+RUN apk add --no-cache postgresql-client
 
 # Copy package files and install dependencies
 COPY package*.json ./
@@ -15,7 +14,8 @@ RUN yarn install
 
 # Copy source code and build
 COPY . .
-RUN yarn add -D terser && yarn install && yarn build
+# Just build using the locally installed packages
+RUN yarn build
 
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
