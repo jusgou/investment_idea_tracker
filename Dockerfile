@@ -14,7 +14,7 @@ RUN yarn install
 
 # Copy source code and build
 COPY . .
-RUN yarn add terser && yarn build
+RUN yarn add -D terser && yarn install && yarn build
 
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
