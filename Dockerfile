@@ -5,8 +5,9 @@ WORKDIR /app
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
-# Install PostgreSQL client tools
-RUN apk add --no-cache postgresql-client
+# Install PostgreSQL client tools and global packages
+RUN apk add --no-cache postgresql-client && \
+    npm install -g vite
 
 # Copy package files and install dependencies
 COPY package*.json ./
