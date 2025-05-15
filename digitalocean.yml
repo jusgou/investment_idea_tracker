@@ -15,7 +15,25 @@ services:
         value: production
       - key: PORT
         value: "80"
+      - key: DATABASE_URL
+        value: postgresql://postgres:postgres@db:5432/investment_ideas
     github:
       enabled: true
       repo: your-username/investment_idea_tracker
       branch: main
+
+  - name: db
+    environment_slug: postgresql_16
+    source_dir: .
+    environment:
+      - key: POSTGRES_USER
+        value: postgres
+      - key: POSTGRES_PASSWORD
+        value: postgres
+      - key: POSTGRES_DB
+        value: investment_ideas
+    database:
+      enabled: true
+      database_name: investment_ideas
+      database_user: postgres
+      database_password: postgres
