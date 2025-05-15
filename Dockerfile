@@ -8,11 +8,16 @@ ENV NODE_ENV=${NODE_ENV}
 # Install PostgreSQL client tools
 RUN apk add --no-cache postgresql-client
 
-COPY package*.json ./
-RUN yarn install
+# Install yarn globally
+RUN npm install -g yarn
 
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN yarn install --frozen-lockfile
+
+# Copy source code and build
 COPY . .
-RUN yarn build
+RUN yarn add terser && yarn build
 
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
