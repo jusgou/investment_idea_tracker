@@ -21,24 +21,38 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <Layout>
-                    <Routes>
-                      <Route path="/" element={<Dashboard />} />
-                      <Route path="/ideas" element={<IdeasList />} />
-                      <Route path="/ideas/:id" element={<IdeaDetail />} />
-                      <Route path="/create" element={<CreateIdea />} />
-                      <Route path="/edit/:id" element={<EditIdea />} />
-                      <Route path="/calculator" element={<Calculator />} />
-                      <Route path="*" element={<Navigate to="/" replace />} />
-                    </Routes>
-                  </Layout>
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/">
+              <Route
+                index
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <Routes>
+                        <Route path="/" element={<Dashboard />} />
+                        <Route path="/ideas" element={<IdeasList />} />
+                        <Route path="/ideas/:id" element={<IdeaDetail />} />
+                        <Route path="/create" element={<CreateIdea />} />
+                        <Route path="/edit/:id" element={<EditIdea />} />
+                        <Route path="/calculator" element={<Calculator />} />
+                        <Route path="*" element={<Navigate to="/" replace />} />
+                      </Routes>
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <Routes>
+                        <Route path="*" element={<Navigate to="/" replace />} />
+                      </Routes>
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
           </Routes>
         </Router>
       </AppProvider>
