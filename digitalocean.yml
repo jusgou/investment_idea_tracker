@@ -19,7 +19,7 @@ services:
         value: postgresql://postgres:postgres@db:5432/investment_ideas
     github:
       enabled: true
-      repo: your-username/investment_idea_tracker
+      repo: jusgou/investment_idea_tracker
       branch: main
 
   - name: db

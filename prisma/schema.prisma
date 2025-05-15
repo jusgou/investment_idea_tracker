@@ -14,38 +14,43 @@ model User {
   name      String?
   ideas     Idea[]
   history   IdeaHistory[]
+  isAdmin   Boolean       @default(false)
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
 }
 
 model Idea {
-  id          String    @id @default(cuid())
-  title       String
-  description String?
-  category    String
-  symbol      String?
+  id              String    @id @default(cuid())
+  title           String
+  description     String?
+  category        String
+  symbol          String?
   targetBuyPrice  Float?
   currentPrice    Float?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  userId       String
-  user         User      @relation(fields: [userId], references: [id])
-  tags         String[]
-  history      IdeaHistory[]
+  status          String    @default("active")
+  notes           String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  userId          String
+  user            User      @relation(fields: [userId], references: [id])
+  tags            String[]
+  history         IdeaHistory[]
 }
 
 model IdeaHistory {
-  id          String    @id @default(cuid())
-  ideaId      String
-  idea        Idea      @relation(fields: [ideaId], references: [id])
-  title       String
-  description String?
-  category    String
-  symbol      String?
+  id              String    @id @default(cuid())
+  ideaId          String
+  idea            Idea      @relation(fields: [ideaId], references: [id])
+  title           String
+  description     String?
+  category        String
+  symbol          String?
   targetBuyPrice  Float?
   currentPrice    Float?
-  tags         String[]
-  createdAt    DateTime  @default(now())
-  userId       String
-  user         User      @relation(fields: [userId], references: [id])
+  status          String
+  notes           String?
+  tags            String[]
+  createdAt       DateTime  @default(now())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id])
 }
