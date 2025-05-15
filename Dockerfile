@@ -14,8 +14,8 @@ RUN yarn install
 
 # Copy source code and build
 COPY . .
-# Explicitly add terser before building
-RUN yarn add -D terser && yarn build
+# Explicitly add terser, then build using npx
+RUN yarn add -D terser && npx vite build
 
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
