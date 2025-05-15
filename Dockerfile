@@ -8,12 +8,9 @@ ENV NODE_ENV=${NODE_ENV}
 # Install PostgreSQL client tools
 RUN apk add --no-cache postgresql-client
 
-# Install yarn globally
-RUN npm install -g yarn
-
 # Copy package files and install dependencies
 COPY package*.json ./
-RUN yarn install --frozen-lockfile
+RUN yarn install
 
 # Copy source code and build
 COPY . .
