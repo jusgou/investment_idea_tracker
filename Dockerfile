@@ -12,10 +12,13 @@ RUN apk add --no-cache postgresql-client
 COPY package*.json ./
 RUN yarn install
 
-# Copy source code and build
+# Copy source code
 COPY . .
-# Explicitly add terser, then build using npx
-RUN yarn add -D terser && npx vite build
+
+# Explicitly add terser and build using yarn's bin path
+RUN yarn add -D terser && \
+    yarn install && \
+    ./node_modules/.bin/vite build
 
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
