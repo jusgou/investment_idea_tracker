@@ -17,8 +17,23 @@ RUN yarn install --frozen-lockfile
 # Copy source code
 COPY . .
 
-# Build the application using npx to run the local vite
-RUN npx vite build
+# Make sure terser is installed for minification
+RUN yarn add -D terser
+
+# Create a custom build script to run vite directly
+RUN echo "const path = require('path');" > build.js && \
+    echo "const { build } = require('vite');" >> build.js && \
+    echo "async function buildApp() {" >> build.js && \
+    echo "  try {" >> build.js && \
+    echo "    await build({ configFile: path.resolve(__dirname, 'vite.config.ts') });" >> build.js && \
+    echo "    console.log('Build completed successfully!');" >> build.js && \
+    echo "  } catch (error) {" >> build.js && \
+    echo "    console.error('Build failed:', error);" >> build.js && \
+    echo "    process.exit(1);" >> build.js && \
+    echo "  }" >> build.js && \
+    echo "}" >> build.js && \
+    echo "buildApp();" >> build.js && \
+    node build.js
 
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
