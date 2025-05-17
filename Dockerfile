@@ -1,4 +1,4 @@
-FROM node:16-alpine AS build
+FROM node:18-alpine AS build
 
 WORKDIR /app
 
@@ -17,7 +17,7 @@ RUN yarn install --frozen-lockfile
 # Copy source code
 COPY . .
 
-# Build the application (no need for global vite or explicit terser)
+# Build the application
 RUN yarn build
 
 FROM nginx:alpine
