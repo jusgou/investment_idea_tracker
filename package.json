@@ -11,6 +11,7 @@
     "start": "vite preview --port 80"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "@types/react-bootstrap": "0.32.37",
     "bootstrap": "5.3.6",
     "firebase": "9.21.0",
