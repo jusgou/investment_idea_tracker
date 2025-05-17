@@ -8,17 +8,37 @@ ENV NODE_ENV=${NODE_ENV}
 # Install PostgreSQL client tools only
 RUN apk add --no-cache postgresql-client
 
-# Copy package files and install dependencies
+# Copy package files
 COPY package*.json ./
+
+# First do a clean install with just the package.json
 RUN yarn install
 
-# Copy source code
+# Copy all the source code
 COPY . .
 
-# Explicitly add terser and build using yarn's bin path
-RUN yarn add -D terser && \
-    yarn install && \
-    ./node_modules/.bin/vite build
+# Explicitly add terser
+RUN yarn add -D terser
+
+# Create a custom build script using Node.js API directly
+RUN echo 'const path = require("path");\
+const { build } = require("vite");\
+\
+async function buildApp() {\
+  try {\
+    await build({\
+      configFile: path.resolve(__dirname, "vite.config.ts"),\
+      mode: "production"\
+    });\
+    console.log("Build completed successfully!");\
+  } catch (error) {\
+    console.error("Build failed:", error);\
+    process.exit(1);\
+  }\
+}\
+\
+buildApp();' > build-script.js && \
+    node build-script.js
 
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
