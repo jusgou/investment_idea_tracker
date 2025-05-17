@@ -18,8 +18,18 @@ export default defineConfig({
       }
     }
   },
+  // Add this resolve section to fix Firebase imports
+  resolve: {
+    alias: {
+      'firebase/app': 'firebase/app',
+      'firebase/auth': 'firebase/auth',
+      'firebase/firestore': 'firebase/firestore',
+      'firebase/functions': 'firebase/functions',
+      'firebase/storage': 'firebase/storage',
+    },
+  },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', 'firebase'],
+    include: ['react', 'react-dom', 'react-router-dom', 'firebase/app', 'firebase/auth', 'firebase/firestore', 'firebase/storage'],
     exclude: ['lucide-react']
   }
 });

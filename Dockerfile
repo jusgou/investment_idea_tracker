@@ -1,44 +1,24 @@
-FROM node:24-alpine AS build
+FROM node:16-alpine AS build
 
 WORKDIR /app
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
-# Install PostgreSQL client tools only
+# Install PostgreSQL client tools if needed
 RUN apk add --no-cache postgresql-client
 
 # Copy package files
-COPY package*.json ./
+COPY package.json yarn.lock ./
 
-# First do a clean install with just the package.json
-RUN yarn install
+# Install dependencies
+RUN yarn install --frozen-lockfile
 
-# Copy all the source code
+# Copy source code
 COPY . .
 
-# Explicitly add terser
-RUN yarn add -D terser
-
-# Create a custom build script using Node.js API directly
-RUN echo 'const path = require("path");\
-const { build } = require("vite");\
-\
-async function buildApp() {\
-  try {\
-    await build({\
-      configFile: path.resolve(__dirname, "vite.config.ts"),\
-      mode: "production"\
-    });\
-    console.log("Build completed successfully!");\
-  } catch (error) {\
-    console.error("Build failed:", error);\
-    process.exit(1);\
-  }\
-}\
-\
-buildApp();' > build-script.js && \
-    node build-script.js
+# Build the application (no need for global vite or explicit terser)
+RUN yarn build
 
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
