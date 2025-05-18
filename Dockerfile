@@ -17,17 +17,8 @@ COPY . .
 # Build the application
 RUN npx vite build
 
-# Production stage
 FROM nginx:alpine
-
-# Copy built assets from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
-
-# Copy nginx config if you have one
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Expose your port
-EXPOSE 3000
-
-# Start nginx
+EXPOSE 80  # Standard HTTP port
 CMD ["nginx", "-g", "daemon off;"]
