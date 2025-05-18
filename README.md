@@ -29,7 +29,8 @@ investment_idea_tracker/
 - Responsive design
 - TypeScript-based frontend
 - Docker-based deployment
-- User authentication (planned integration with site-wide SSO)
+- Firebase Authentication integration
+- PostgreSQL database integration
 
 ## Technical Stack
 
@@ -38,15 +39,18 @@ investment_idea_tracker/
   - TypeScript
   - Vite
   - Tailwind CSS
-  - Firebase Authentication (planned integration with site-wide SSO)
+  - Firebase Authentication
+  - React Router
+  - Bootstrap with React Bootstrap
 
 - Backend:
   - PostgreSQL for data persistence
   - REST API for data operations
 
 - Build & Deployment:
-  - Docker
+  - Docker (Multi-stage build)
   - Digital Ocean App Platform
+  - Nginx for production serving
 
 ## Deployment
 
@@ -56,10 +60,19 @@ investment_idea_tracker/
 2. Subdomain: investmentideas
 3. App URL: https://investmentideas.swingfaders.com
 4. Build Strategy: Dockerfile
+5. Port: 3000
 
 ### Environment Variables
 
 - NODE_ENV=production
+
+### Firebase Configuration
+
+Authorized domains:
+- localhost
+- investment-idea-tracker.firebaseapp.com
+- investment-idea-tracker.web.app
+- investmentideas.swingfaders.com
 
 ## Development
 
@@ -78,6 +91,22 @@ yarn build
 # Start production server
 yarn start
 ```
+
+### Build Configuration
+
+Vite Configuration:
+- Base URL: '/'
+- Asset handling:
+  - Asset files: 'assets/[name]-[hash][extname]'
+  - Chunk files: 'assets/[name]-[hash].js'
+  - Entry files: 'assets/[name]-[hash].js'
+- Firebase aliases for all required services
+
+Docker Configuration:
+- Node version: 18.20.4-alpine
+- Multi-stage build
+- Nginx serving on port 3000
+- PostgreSQL client tools installed
 
 ## Contributing
 
